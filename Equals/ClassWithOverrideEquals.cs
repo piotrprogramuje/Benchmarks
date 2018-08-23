@@ -1,13 +1,18 @@
-﻿using System;
-
-namespace Equals
+﻿namespace Equals
 {
-    public struct StructureWithIEquatableInterface : IEquatable<StructureWithIEquatableInterface>
+    public sealed class ClassWithOverrideEquals
     {
         private readonly string _referenceField;
         private readonly int _valueField;
 
-        public StructureWithIEquatableInterface(
+        public ClassWithOverrideEquals()
+            : this(
+                default(string),
+                default(int))
+        {
+        }
+
+        public ClassWithOverrideEquals(
             string referenceField,
             int valueField)
         {
@@ -18,10 +23,11 @@ namespace Equals
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is StructureWithIEquatableInterface instance && Equals(instance);
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is ClassWithOverrideEquals instance && Equals(instance);
         }
 
-        public bool Equals(StructureWithIEquatableInterface other)
+        private bool Equals(ClassWithOverrideEquals other)
         {
             return string.Equals(_referenceField, other._referenceField) && _valueField == other._valueField;
         }

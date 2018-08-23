@@ -16,7 +16,7 @@
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is StructureWithOverrideEquals && Equals((StructureWithOverrideEquals) obj);
+            return obj is StructureWithOverrideEquals instance && Equals(instance);
         }
 
         private bool Equals(StructureWithOverrideEquals other)

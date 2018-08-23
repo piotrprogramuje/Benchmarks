@@ -73,5 +73,51 @@ namespace Equals
                 new StructureWithIEquatableInterface(),
                 new StructureWithIEquatableInterface());
         }
+
+        [Benchmark]
+        public bool CompareClassWithOverrideEqualsByInstanceMethod()
+        {
+            return new ClassWithOverrideEquals().Equals(
+                new ClassWithOverrideEquals());
+        }
+
+        [Benchmark]
+        public bool CompareClassWithIEquatableInterfaceByInstanceMethod()
+        {
+            return new ClassWithIEquatableInterface().Equals(
+                new ClassWithIEquatableInterface());
+        }
+
+        [Benchmark]
+        public bool CompareClassWithOverrideEqualsByStaticMethod()
+        {
+            return Equals(
+                new ClassWithOverrideEquals(),
+                new ClassWithOverrideEquals());
+        }
+
+        [Benchmark]
+        public bool CompareClassWithIEquatableInterfaceByStaticMethod()
+        {
+            return Equals(
+                new ClassWithIEquatableInterface(),
+                new ClassWithIEquatableInterface());
+        }
+
+        [Benchmark]
+        public bool CompareClassWithOverrideEqualsByDefaultEqualityComparer()
+        {
+            return EqualityComparer<ClassWithOverrideEquals>.Default.Equals(
+                new ClassWithOverrideEquals(),
+                new ClassWithOverrideEquals());
+        }
+
+        [Benchmark]
+        public bool CompareClassWithIEquatableInterfaceByDefaultEqualityComparer()
+        {
+            return EqualityComparer<ClassWithIEquatableInterface>.Default.Equals(
+                new ClassWithIEquatableInterface(),
+                new ClassWithIEquatableInterface());
+        }
     }
 }

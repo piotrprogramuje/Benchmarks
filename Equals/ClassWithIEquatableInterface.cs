@@ -2,12 +2,19 @@
 
 namespace Equals
 {
-    public struct StructureWithIEquatableInterface : IEquatable<StructureWithIEquatableInterface>
+    public sealed class ClassWithIEquatableInterface : IEquatable<ClassWithIEquatableInterface>
     {
         private readonly string _referenceField;
         private readonly int _valueField;
 
-        public StructureWithIEquatableInterface(
+        public ClassWithIEquatableInterface()
+        :this(
+            default(string),
+            default(int))
+        {
+        }
+
+        public ClassWithIEquatableInterface(
             string referenceField,
             int valueField)
         {
@@ -18,11 +25,14 @@ namespace Equals
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
-            return obj is StructureWithIEquatableInterface instance && Equals(instance);
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is ClassWithIEquatableInterface instance && Equals(instance);
         }
 
-        public bool Equals(StructureWithIEquatableInterface other)
+        public bool Equals(ClassWithIEquatableInterface other)
         {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
             return string.Equals(_referenceField, other._referenceField) && _valueField == other._valueField;
         }
 

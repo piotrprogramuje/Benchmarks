@@ -4,45 +4,26 @@ using BenchmarkDotNet.Attributes;
 
 namespace Equals
 {
+    [ClrJob]
+    [IterationsColumn, MaxColumn, MinColumn]
     public class Benchmark
     {
-        private StructureWithDefaultEquals _structureWithDefaultEquals1;
-        private StructureWithDefaultEquals _structureWithDefaultEquals2;
-        private StructureWithOverrideEquals _structureWithOverrideEquals1;
-        private StructureWithOverrideEquals _structureWithOverrideEquals2;
-        private StructureWithIEquatableInterface _structureWithIEquatableInterface1;
-        private StructureWithIEquatableInterface _structureWithIEquatableInterface2;
-        private ClassWithOverrideEquals _classWithOverrideEquals1;
-        private ClassWithOverrideEquals _classWithOverrideEquals2;
-        private ClassWithIEquatableInterface _classWithIEquatableInterface1;
-        private ClassWithIEquatableInterface _classWithIEquatableInterface2;
-        private object _anonymousType1;
-        private object _anonymousType2;
-        private (string, int) _valueTuple1;
-        private (string, int) _valueTuple2;
-        private Tuple<string, int> _tuple1;
-        private Tuple<string, int> _tuple2;
-
-        [GlobalSetup]
-        public void GlobalSetup()
-        {
-            _structureWithDefaultEquals1 = new StructureWithDefaultEquals();
-            _structureWithDefaultEquals2 = new StructureWithDefaultEquals();
-            _structureWithOverrideEquals1 = new StructureWithOverrideEquals();
-            _structureWithOverrideEquals2 = new StructureWithOverrideEquals();
-            _structureWithIEquatableInterface1 = new StructureWithIEquatableInterface();
-            _structureWithIEquatableInterface2 = new StructureWithIEquatableInterface();
-            _classWithOverrideEquals1 = new ClassWithOverrideEquals();
-            _classWithOverrideEquals2 = new ClassWithOverrideEquals();
-            _classWithIEquatableInterface1 = new ClassWithIEquatableInterface();
-            _classWithIEquatableInterface2 = new ClassWithIEquatableInterface();
-            _anonymousType1 = new {ReferenceField = default(string), ValueField = default(int)};
-            _anonymousType2 = new {ReferenceField = default(string), ValueField = default(int)};
-            _valueTuple1 = (default(string), default(int));
-            _valueTuple2 = (default(string), default(int));
-            _tuple1 = Tuple.Create(default(string), default(int));
-            _tuple2 = Tuple.Create(default(string), default(int));
-        }
+        private readonly StructureWithDefaultEquals _structureWithDefaultEquals1 = new StructureWithDefaultEquals();
+        private readonly StructureWithDefaultEquals _structureWithDefaultEquals2 = new StructureWithDefaultEquals();
+        private readonly StructureWithOverrideEquals _structureWithOverrideEquals1 = new StructureWithOverrideEquals();
+        private readonly StructureWithOverrideEquals _structureWithOverrideEquals2 = new StructureWithOverrideEquals();
+        private readonly StructureWithIEquatableInterface _structureWithIEquatableInterface1 = new StructureWithIEquatableInterface();
+        private readonly StructureWithIEquatableInterface _structureWithIEquatableInterface2 = new StructureWithIEquatableInterface();
+        private readonly ClassWithOverrideEquals _classWithOverrideEquals1 = new ClassWithOverrideEquals();
+        private readonly ClassWithOverrideEquals _classWithOverrideEquals2 = new ClassWithOverrideEquals();
+        private readonly ClassWithIEquatableInterface _classWithIEquatableInterface1 = new ClassWithIEquatableInterface();
+        private readonly ClassWithIEquatableInterface _classWithIEquatableInterface2 = new ClassWithIEquatableInterface();
+        private readonly object _anonymousType1 = new { ReferenceField = default(string), ValueField = default(int) };
+        private readonly object _anonymousType2 = new { ReferenceField = default(string), ValueField = default(int) };
+        private readonly (string, int) _valueTuple1 = (default(string), default(int));
+        private readonly (string, int) _valueTuple2 = (default(string), default(int));
+        private readonly Tuple<string, int> _tuple1 = Tuple.Create(default(string), default(int));
+        private readonly Tuple<string, int> _tuple2 = Tuple.Create(default(string), default(int));
 
         [Benchmark]
         public bool CompareStructureWithDefaultEqualsByInstanceMethod()

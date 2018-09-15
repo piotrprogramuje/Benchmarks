@@ -184,5 +184,21 @@ namespace Equals
                 _tuple1,
                 _tuple2);
         }
+
+        [Benchmark]
+        public bool CompareValueTuplesByDefaultEqualityComparer()
+        {
+            return EqualityComparer<ValueTuple<string, int>>.Default.Equals(
+                _valueTuple1,
+                _valueTuple2);
+        }
+
+        [Benchmark]
+        public bool CompareTuplesByDefaultEqualityComparer()
+        {
+            return EqualityComparer<Tuple<string, int>>.Default.Equals(
+                _tuple1,
+                _tuple2);
+        }
     }
 }

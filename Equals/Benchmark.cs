@@ -24,6 +24,13 @@ namespace Equals
         private readonly (string, int) _valueTuple2 = (default(string), default(int));
         private readonly Tuple<string, int> _tuple1 = Tuple.Create(default(string), default(int));
         private readonly Tuple<string, int> _tuple2 = Tuple.Create(default(string), default(int));
+        private readonly EqualityComparer<StructureWithDefaultEquals> _defaultEqualityComparerOfStructureWithDefaultEquals = EqualityComparer<StructureWithDefaultEquals>.Default;
+        private readonly EqualityComparer<StructureWithOverrideEquals> _defaultEqualityComparerOfStructureWithOverrideEquals = EqualityComparer<StructureWithOverrideEquals>.Default;
+        private readonly EqualityComparer<StructureWithIEquatableInterface> _defaultEqualityComparerOfStructureWithIEquatableInterface = EqualityComparer<StructureWithIEquatableInterface>.Default;
+        private readonly EqualityComparer<ClassWithOverrideEquals> _defaultEqualityComparerOfClassWithOverrideEquals = EqualityComparer<ClassWithOverrideEquals>.Default;
+        private readonly EqualityComparer<ClassWithIEquatableInterface> _defaultEqualityComparerOfClassWithIEquatableInterface = EqualityComparer<ClassWithIEquatableInterface>.Default;
+        private readonly EqualityComparer<Tuple<string, int>> _defaultEqualityComparerOfTuple = EqualityComparer<Tuple<string, int>>.Default;
+        private readonly EqualityComparer<ValueTuple<string, int>> _defaultEqualityComparerOfValueTuple = EqualityComparer<ValueTuple<string, int>>.Default;
 
         [Benchmark]
         public bool CompareStructureWithDefaultEqualsByInstanceMethod()
@@ -73,7 +80,7 @@ namespace Equals
         [Benchmark]
         public bool CompareStructureWithDefaultEqualsByDefaultEqualityComparer()
         {
-            return EqualityComparer<StructureWithDefaultEquals>.Default.Equals(
+            return _defaultEqualityComparerOfStructureWithDefaultEquals.Equals(
                 _structureWithDefaultEquals1,
                 _structureWithDefaultEquals2);
         }
@@ -81,7 +88,7 @@ namespace Equals
         [Benchmark]
         public bool CompareStructureWithOverrideEqualsByDefaultEqualityComparer()
         {
-            return EqualityComparer<StructureWithOverrideEquals>.Default.Equals(
+            return _defaultEqualityComparerOfStructureWithOverrideEquals.Equals(
                 _structureWithOverrideEquals1,
                 _structureWithOverrideEquals2);
         }
@@ -89,7 +96,7 @@ namespace Equals
         [Benchmark]
         public bool CompareStructureWithIEquatableInterfaceByDefaultEqualityComparer()
         {
-            return EqualityComparer<StructureWithIEquatableInterface>.Default.Equals(
+            return _defaultEqualityComparerOfStructureWithIEquatableInterface.Equals(
                 _structureWithIEquatableInterface1,
                 _structureWithIEquatableInterface2);
         }
@@ -127,7 +134,7 @@ namespace Equals
         [Benchmark]
         public bool CompareClassWithOverrideEqualsByDefaultEqualityComparer()
         {
-            return EqualityComparer<ClassWithOverrideEquals>.Default.Equals(
+            return _defaultEqualityComparerOfClassWithOverrideEquals.Equals(
                 _classWithOverrideEquals1,
                 _classWithOverrideEquals2);
         }
@@ -135,7 +142,7 @@ namespace Equals
         [Benchmark]
         public bool CompareClassWithIEquatableInterfaceByDefaultEqualityComparer()
         {
-            return EqualityComparer<ClassWithIEquatableInterface>.Default.Equals(
+            return _defaultEqualityComparerOfClassWithIEquatableInterface.Equals(
                 _classWithIEquatableInterface1,
                 _classWithIEquatableInterface2);
         }
@@ -188,7 +195,7 @@ namespace Equals
         [Benchmark]
         public bool CompareValueTuplesByDefaultEqualityComparer()
         {
-            return EqualityComparer<ValueTuple<string, int>>.Default.Equals(
+            return _defaultEqualityComparerOfValueTuple.Equals(
                 _valueTuple1,
                 _valueTuple2);
         }
@@ -196,7 +203,7 @@ namespace Equals
         [Benchmark]
         public bool CompareTuplesByDefaultEqualityComparer()
         {
-            return EqualityComparer<Tuple<string, int>>.Default.Equals(
+            return _defaultEqualityComparerOfTuple.Equals(
                 _tuple1,
                 _tuple2);
         }

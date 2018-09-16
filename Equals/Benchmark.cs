@@ -4,7 +4,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Equals
 {
-    [ClrJob]
+    [CoreJob]
     [IterationsColumn, MaxColumn, MinColumn]
     public class Benchmark
     {
